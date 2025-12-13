@@ -19,7 +19,7 @@
     proto: tcp
   notify: restart ufw
 
-- name: Allow Calico VXLAN (UDP 4789)
+- name: Allow VXLAN (UDP 4789)
   ansible.builtin.ufw:
     rule: allow
     port: "4789"
@@ -33,6 +33,20 @@
     port: "6443"
     proto: tcp
     from_ip: "127.0.0.1"
+  notify: restart ufw
+
+- name: Allow ingress HTTP (80/tcp)
+  ansible.builtin.ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+  notify: restart ufw
+
+- name: Allow ingress HTTPS (443/tcp)
+  ansible.builtin.ufw:
+    rule: allow
+    port: "443"
+    proto: tcp
   notify: restart ufw
 
 - name: Allow k3s supervisor (9345) on master

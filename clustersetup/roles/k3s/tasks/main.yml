@@ -3,56 +3,18 @@
   shell: |
     curl -sfL https://get.k3s.io | \
       K3S_KUBECONFIG_MODE="644" \
-      INSTALL_K3S_EXEC="--flannel-backend=none --cluster-cidr={{ k3s_cluster_cidr }} --disable-network-policy --disable=traefik" sh -
+      INSTALL_K3S_EXEC="--cluster-cidr={{ k3s_cluster_cidr }}" sh -
 
-- name: Apply Calico operator CRDs
+- name: Verify k3s binary installed
+  command: k3s --version
+  register: k3s_version
+  changed_when: false
+  failed_when: k3s_version.rc != 0
+
+- name: Check k3s service is active
   become: true
-  block:
-    - name: Check for Tigera operator CRD (apiservers.operator.tigera.io)
-      shell: kubectl get crd apiservers.operator.tigera.io
-      register: tigera_crd_check
-      failed_when: false
-      changed_when: false
+  command: systemctl is-active k3s
+  register: k3s_service
+  changed_when: false
+  failed_when: k3s_service.stdout.strip() != 'active'
 
-    - name: Apply Calico operator CRDs (if missing)
-      when: tigera_crd_check.rc != 0
-      shell: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/{{ calico_version }}/manifests/operator-crds.yaml
-      register: apply_operator_crds
-      failed_when: apply_operator_crds.rc != 0
-
-- name: Apply Tigera operator
-  become: true
-  block:
-    - name: Check for Tigera operator deployment
-      shell: kubectl get deployment tigera-operator -n tigera-operator
-      register: tigera_deploy_check
-      failed_when: false
-      changed_when: false
-
-    - name: Apply Tigera operator manifest (if deployment missing)
-      when: tigera_deploy_check.rc != 0
-      shell: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/{{ calico_version }}/manifests/tigera-operator.yaml
-      register: apply_tigera
-      failed_when: apply_tigera.rc != 0
-
-- name: Apply Calico custom resources
-  become: true
-  block:
-    - name: Check for installations.operator.tigera.io CRD
-      shell: kubectl get crd installations.operator.tigera.io
-      register: installations_crd_check
-      failed_when: false
-      changed_when: false
-
-    - name: Apply Calico custom resources (if missing)
-      when: installations_crd_check.rc != 0
-      shell: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/{{ calico_version }}/manifests/custom-resources.yaml
-      register: apply_custom_resources
-      failed_when: apply_custom_resources.rc != 0
-
-- name: Wait for all pods to become Ready (timeout 5m)
-  become: true
-  shell: |
-    kubectl wait --for=condition=Ready pods --all --all-namespaces --timeout=300s
-  register: pods_ready
-  failed_when: pods_ready.rc != 0
