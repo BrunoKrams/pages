@@ -1,2 +1,3 @@
 -Enable Network policies to seperate the pages
--Add 
+-Add HTTPS redirection and HTTPS
+-Unify variable usage

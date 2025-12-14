@@ -1,0 +1,2 @@
+letsencrypt_email: ""
+traefik_acme_resolver: ""
