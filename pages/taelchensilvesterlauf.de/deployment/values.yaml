@@ -1,0 +1,28 @@
+containerName: app
+
+namespace: taelchensilvesterlauf-de
+
+image:
+  repository: taelchensilvesterlauf/pages
+  tag: taelchensilvesterlauf-de-1
+  pullPolicy: Always
+
+imagePullSecret:
+  name: registry-secret
+  dockerconfigjson_base64: ""
+
+replicaCount: 1
+
+service:
+  port: 80
+  targetPort: 80
+
+ingress:
+  className: traefik
+  hosts:
+    - host: taelchensilvesterlauf.de
+      path: /
+      pathType: Prefix
+    - host: www.taelchensilvesterlauf.de
+      path: /
+      pathType: Prefix
