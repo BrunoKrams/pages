@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import type { Painting } from '../types';
+import type { GalleryItemModel, Painting } from '../types';
 import GalleryItem from './GalleryItem';
 import './Gallery.css';
 
 interface GalleryProps {
-  paintings: Painting[];
+  galleryItems: GalleryItemModel[];
 }
 
-const Gallery = ({ paintings }: GalleryProps) => {
-  const [selectedImage, setSelectedImage] = useState<Painting | null>(null);
-
+const Gallery = ({ galleryItems }: GalleryProps) => {
+  const [selectedImage, setSelectedImage] = useState<GalleryItemModel | null>(null);
   const handleImageClick = (painting: Painting) => {
     setSelectedImage(painting);
   };
@@ -22,14 +21,14 @@ const Gallery = ({ paintings }: GalleryProps) => {
     <section className="gallery">
       <h2 className="gallery__title">Gallerie</h2>
       <div className="gallery__grid">
-        {paintings.map((painting) => (
+        {galleryItems.map((galleryItem) => (
           <GalleryItem
-            key={painting.id}
-            title={painting.title}
-            artist={painting.artistName}
-            imageUrl={painting.imageUrl}
-            description={painting.description}
-            onImageClick={() => handleImageClick(painting)}
+            key={galleryItem.id}
+            title={galleryItem.title}
+            artist={galleryItem.subtitle}
+            imageUrl={galleryItem.imageUrl}
+            description={galleryItem.description}
+            onImageClick={() => handleImageClick(galleryItem)}
           />
         ))}
       </div>
@@ -42,7 +41,7 @@ const Gallery = ({ paintings }: GalleryProps) => {
             </button>
             <img
               src={selectedImage.imageUrl}
-              alt={`${selectedImage.title} by ${selectedImage.artistName}`}
+              alt={`${selectedImage.title} by ${selectedImage.subtitle}`}
               className="lightbox__image"
             />
           </div>

@@ -1,15 +1,14 @@
-export interface Painter {
-  id: string;
-  name: string;
-  bio: string;
-  profileImage?: string;
-}
-
-export interface Painting {
+export interface ArticleModel {
   id: string;
   title: string;
-  artistId: string;
-  artistName: string;
+  content: string;
+  image?: string;
+}
+
+export interface GalleryItemModel {
+  id: string;
+  title: string;
+  subtitle: string;
   imageUrl: string;
   description?: string;
 }

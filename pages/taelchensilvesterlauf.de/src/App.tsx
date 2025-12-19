@@ -1,8 +1,8 @@
 import Header from './components/Header'
-import PainterProfile from './components/PainterProfile'
+import Article from './components/Article'
 import Gallery from './components/Gallery'
 import Footer from './components/Footer'
-import { painters, paintings } from './data/paintersData'
+import { articles, galleryItems } from './data/data'
 import './App.css'
 
 function App() {
@@ -10,18 +10,18 @@ function App() {
     <div className="app">
       <Header />
       
-      <section className="painters-section">
-        {painters.map((painter) => (
-          <PainterProfile
-            key={painter.id}
-            name={painter.name}
-            bio={painter.bio}
-            image={painter.profileImage}
+      <section className="articles-section">
+        {articles.map((article) => (
+          <Article
+            key={article.id}
+            title={article.title}
+            content={article.content}
+            image={article.image}
           />
         ))}
       </section>
 
-      <Gallery paintings={paintings} />
+      <Gallery galleryItems={galleryItems} />
       
       <Footer />
     </div>
