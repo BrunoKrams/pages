@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { GalleryItemModel, Painting } from '../types';
+import type { GalleryItemModel } from '../types';
 import GalleryItem from './GalleryItem';
 import './Gallery.css';
 
@@ -9,8 +9,8 @@ interface GalleryProps {
 
 const Gallery = ({ galleryItems }: GalleryProps) => {
   const [selectedImage, setSelectedImage] = useState<GalleryItemModel | null>(null);
-  const handleImageClick = (painting: Painting) => {
-    setSelectedImage(painting);
+  const handleImageClick = (galleryItem: GalleryItemModel) => {
+    setSelectedImage(galleryItem);
   };
 
   const handleCloseLightbox = () => {
