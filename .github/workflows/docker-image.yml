@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build the Docker image
       env:
-        TOKEN: ${{ secrets.DOCKER_REGISTRY }} && \
-      run: docker login -u brunokrams -p $TOKEN  && \ docker build pages/wiesenkunst.de --tag brunokrams/pages:wiesenkunst-2 && \
+        TOKEN: ${{ secrets.DOCKER_REGISTRY }}
+      run: docker login -u brunokrams -p $TOKEN  && \
+        docker build pages/wiesenkunst.de --tag brunokrams/pages:wiesenkunst-2 && \
         docker push brunokrams/pages:wiesenkunst-2
