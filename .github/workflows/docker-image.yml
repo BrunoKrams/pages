@@ -17,6 +17,7 @@ jobs:
     - name: Build the Docker image
       env:
         TOKEN: ${{ secrets.DOCKER_REGISTRY }}
-      run: echo "$env.TOKEN" | docker login -u brunokrams --password-stdin \
-        docker build pages/wiesenkunst.de --tag brunokrams/pages:wiesenkunst-2 && \
+      run: cd pages/wiesenkunst.de && \
+        echo "$env.TOKEN" | docker login -u brunokrams --password-stdin \
+        docker build -t brunokrams/pages:wiesenkunst-2 . && \
         docker push brunokrams/pages:wiesenkunst-2
