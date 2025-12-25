@@ -14,7 +14,7 @@ const Footer = () => {
           <a href="#privacy" className="footer__link">Datenschutz</a>
         </div>
         <p className="footer__copyright">
-          © {currentYear} Atelier Tälchen. Alle Rechte vorbehalten.
+          © {currentYear} Atelier Wiesenkunst. Alle Rechte vorbehalten.
         </p>
       </div>
     </footer>
