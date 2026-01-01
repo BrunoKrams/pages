@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Aktuelles from './pages/Aktuelles'
+import Aktuelles from './pages/Recent.tsx'
 import Ergebnisse from './pages/Results.tsx'
 import GalleryPage from './pages/GalleryPage'
 

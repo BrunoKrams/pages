@@ -1,6 +1,5 @@
-import type { ArticleModel, GalleryItemModel } from '../types';
+import type { GalleryItemModel } from '../types';
 import { captions2025 } from './captions-2025';
-import flyer from '../images/flyer.jpeg';
 import vorher2024 from '../images/2024/2024_vorher.jpeg';
 import nachher2024 from '../images/2024/2024_nachher.jpeg';
 import vorher2023 from '../images/2023/2023_vorher.jpeg';
@@ -11,14 +10,7 @@ const images2025 = import.meta.glob('../images/2025/*.{png,jpg,jpeg,gif,webp}', 
   as: 'url'
 }) as Record<string, string>;
 
-export const articles: ArticleModel[] = [
-  {
-    id: '1',
-    title: 'Ankündigung',
-    content: 'Am 31. Dezember 2025 startet die dritte Auflage des Tälchen Silvesterlaufs.',
-    image: flyer,
-  }
-];
+
 
 // Build Gallery items from 2025 images
 const humanize2025Title = (base: string): string => {

@@ -1,5 +1,5 @@
 import Article from '../components/Article';
-import { articles } from '../model/data/data';
+import { articles } from '../model/data/articles';
 
 export default function Aktuelles() {
   const latest = articles[0];
