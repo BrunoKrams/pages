@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './GalleryItem.css';
 
 interface GalleryItemProps {
@@ -10,12 +9,6 @@ interface GalleryItemProps {
 }
 
 const GalleryItem = ({ title, artist, imageUrl, description, onImageClick }: GalleryItemProps) => {
-  const [imageError, setImageError] = useState(false);
-
-  const handleImageError = () => {
-    setImageError(true);
-  };
-
   return (
     <div className="gallery-item">
       <div className="gallery-item__image-container" onClick={onImageClick}>

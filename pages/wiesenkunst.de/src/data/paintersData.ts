@@ -19,7 +19,7 @@ export const painters: Painter[] = [
   {
     id: '2',
     name: 'Markus',
-    bio: 'Markus ist Mathematiker und Softwareentwickler. In seiner Freizeit malt er Ansichten seiner Heimatstadt Konz und der umliegenden Natur. Seine Werke zeichnen sich durch lebendige Farben aus, die die Essenz der Landschaften einfangen.',
+    bio: 'Markus ist Mathematiker und Softwareentwickler. In seiner Freizeit malt er die Landschaften rund um seine Heimatstadt Konz. Seine Werke zeichnen sich durch lebendige Farben aus, die die Essenz der Landschaften einfangen.',
     profileImage: markus
   }
 ];
